@@ -7,6 +7,7 @@ test('user can log in with valid credentials', async ({ page }) => {
   await loginPage.open();
   await loginPage.login(validUser.username, validUser.password);
 
+  await expect(page).toHaveURL(/inventory.html/);
   await expect(page.getByText('Products')).toBeVisible();
 });
 
