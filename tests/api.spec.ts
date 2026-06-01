@@ -86,3 +86,17 @@ test('GET posts returns posts with valid data', async ({ request }) => {
   expect(postWithValidData).toBeTruthy();
    
 });
+test('GET post by id', async ({ request }) => {
+    const response = await request.get(`${apiUrls.posts}/1`);
+    expect(response.status()).toBe(200);
+
+    const post: ApiPost = await response.json();
+    expect(post.id).toBe(1);
+    expect(typeof post.userId).toBe('number');
+    expect(post.title).not.toBe('');
+    expect(post.body).not.toBe('');
+});
+test('GET non-existing post returns 404', async ({ request }) => {
+    const response = await request.get(`${apiUrls.posts}/999999`);
+    expect(response.status()).toBe(404);
+});
