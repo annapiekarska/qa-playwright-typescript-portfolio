@@ -52,12 +52,8 @@ test('POST posts creates a new post', async ({ request }) => {
         body: 'This post was created by an automated API test',
         userId: 1,
     };
-    const response = await request.post(
-        'https://jsonplaceholder.typicode.com/posts',
-    {
-
+    const response = await request.post(apiUrls.posts, {
       data: payload,
-
     }
   );
  expect(response.status()).toBe(201);
