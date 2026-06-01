@@ -6,7 +6,6 @@ type ApiUser = {
   name: string;
   username: string;
   email: string;
-
 };
 type CreatePostPayload = {
     title: string;
@@ -16,7 +15,12 @@ type CreatePostPayload = {
 type CreatedPost = CreatePostPayload & {
     id: number;
 };
-
+type ApiPost = {
+    userId: number;
+    id: number;
+    title: string;
+    body: string;
+};
 test('GET users returns users with valid data', async ({ request }) => {
   const response = await request.get(apiUrls.users);
 
@@ -58,8 +62,27 @@ test('POST posts creates a new post', async ({ request }) => {
   );
  expect(response.status()).toBe(201);
 
-  const createdPost: CreatedPost = await response.json(); expect(createdPost.id).toBeTruthy();
+  const createdPost: CreatedPost = await response.json();
+  
+  expect(createdPost.id).toBeTruthy();
   expect(createdPost.title).toBe(payload.title);
   expect(createdPost.body).toBe(payload.body);
   expect(createdPost.userId).toBe(payload.userId);
+});
+test('GET posts returns posts with valid data', async ({ request }) => {
+    const response = await request.get(apiUrls.posts);
+    expect(response.status()).toBe(200);
+    const posts: ApiPost[] = await response.json();
+    
+    expect(posts.length).toBeGreaterThan(0);
+
+    const postWithValidData = posts.find((post) =>
+        typeof post.userId === 'number' &&
+        typeof post.id === 'number' &&
+        post.title !== '' &&
+        post.body !== ''
+    );
+
+  expect(postWithValidData).toBeTruthy();
+   
 });
