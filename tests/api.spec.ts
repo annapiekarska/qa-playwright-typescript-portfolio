@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { apiUrls } from '../test-data/apiUrls';
 
 type ApiUser = {
   id: number;
@@ -9,29 +10,25 @@ type ApiUser = {
 };
 
 test('GET users returns users with valid data', async ({ request }) => {
-  const response = await request.get(
-    'https://jsonplaceholder.typicode.com/users'
-  );
+  const response = await request.get(apiUrls.users);
 
   expect(response.status()).toBe(200);
 
-const users: ApiUser[] = await response.json(); 
+  const users: ApiUser[] = await response.json();
 
-expect(users.length).toBeGreaterThan(0);
+  expect(users.length).toBeGreaterThan(0);
 
-const userWithValidData = users.find((user) =>
-typeof  user.id === 'number' &&
+  const userWithValidData = users.find((user) =>
+    typeof user.id === 'number' &&
     user.name !== '' &&
     user.username !== '' &&
     user.email !== ''
-);
+  );
 
-expect(userWithValidData).toBeTruthy();
+  expect(userWithValidData).toBeTruthy();
 });
 test('GET single user returns expected user details', async ({ request }) => {
-  const response = await request.get(
-    'https://jsonplaceholder.typicode.com/users/1'
-  );
+  const response = await request.get(`${apiUrls.users}/1`);
 
   expect(response.status()).toBe(200);
 
