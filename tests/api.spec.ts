@@ -21,6 +21,7 @@ type ApiPost = {
     title: string;
     body: string;
 };
+
 test('GET users returns users with valid data', async ({ request }) => {
   const response = await request.get(apiUrls.users);
 
@@ -99,4 +100,17 @@ test('GET post by id', async ({ request }) => {
 test('GET non-existing post returns 404', async ({ request }) => {
     const response = await request.get(`${apiUrls.posts}/999999`);
     expect(response.status()).toBe(404);
+});
+test('PATCH post updates existing post', async ({ request }) => {
+  const response = await request.patch(`${apiUrls.posts}/1`, {
+      data: {
+        title: 'Updated title',
+      }
+  });
+expect(response.status()).toBe(200);
+
+const updatedPost: ApiPost = await response.json();
+  expect(updatedPost.title).toBe('Updated title');
+  expect(updatedPost.id).toBe(1);
+  expect(updatedPost.userId).toBe(1);
 });
