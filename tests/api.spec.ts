@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { apiUrls } from '../test-data/apiUrls';
+import { PostSchema, PostsSchema } from '../schemas/postSchema';
 
 type ApiUser = {
   id: number;
@@ -71,37 +72,29 @@ test('POST posts creates a new post', async ({ request }) => {
   expect(createdPost.userId).toBe(payload.userId);
 });
 test('GET posts returns posts with valid data', async ({ request }) => {
-    const response = await request.get(apiUrls.posts);
-    expect(response.status()).toBe(200);
-    const posts: ApiPost[] = await response.json();
-    
-    expect(posts.length).toBeGreaterThan(0);
+  const response = await request.get(apiUrls.posts);
 
-    const postWithValidData = posts.find((post) =>
-        typeof post.userId === 'number' &&
-        typeof post.id === 'number' &&
-        post.title !== '' &&
-        post.body !== ''
-    );
+  expect(response.status()).toBe(200);
+  const posts: ApiPost[] = await response.json();
 
-  expect(postWithValidData).toBeTruthy();
-   
+  expect(posts.length).toBeGreaterThan(0);
+
+  PostsSchema.parse(posts);
+
+  const firstPost = posts[0];
+
+  expect(firstPost.title).not.toBe('');
+  expect(firstPost.body).not.toBe('');
 });
 test('GET post by id', async ({ request }) => {
     const response = await request.get(`${apiUrls.posts}/1`);
     expect(response.status()).toBe(200);
 
     const post: ApiPost = await response.json();
-    expect(post).toHaveProperty('userId');
-    expect(post).toHaveProperty('id');
-    expect(post).toHaveProperty('title');
-    expect(post).toHaveProperty('body');
+
+    PostSchema.parse(post);
     
-    expect(typeof post.userId).toBe('number');
-    expect(typeof post.id).toBe('number');
-
     expect(post.id).toBe(1);
-
     expect(post.title).not.toBe('');
     expect(post.body).not.toBe('');
 });
@@ -121,4 +114,12 @@ const updatedPost: ApiPost = await response.json();
   expect(updatedPost.title).toBe('Updated title');
   expect(updatedPost.id).toBe(1);
   expect(updatedPost.userId).toBe(1);
+});
+test('DELETE post deletes existing post', async ({ request }) => {
+  const response = await request.delete(`${apiUrls.posts}/1`);
+  expect(response.status()).toBe(200);
+
+  const body = await response.json();
+
+  expect(body).toEqual({});
 });
