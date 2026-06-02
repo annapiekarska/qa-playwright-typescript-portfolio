@@ -17,5 +17,7 @@ test('user cannot log in with invalid password', async ({ page }) => {
   await loginPage.login(invalidUser.username, invalidUser.password);
 
   await expect(page.getByRole('button', { name: 'Login' })).toBeVisible();
-  await expect(page.getByText('Epic sadface: Username and password do not match any user in this service')).toBeVisible();
+  await expect(
+    page.getByText('Epic sadface: Username and password do not match any user in this service')
+  ).toBeVisible();
 });

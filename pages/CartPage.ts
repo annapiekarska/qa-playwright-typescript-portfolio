@@ -1,9 +1,9 @@
 import { Page } from '@playwright/test';
 
 export class CartPage {
-    constructor(private page: Page) {}
+  constructor(private page: Page) {}
 
-    getCartItem(itemName: string) {
-        return this.page.getByText(itemName);
-    }
+  getCartItem(itemName: string) {
+    return this.page.getByText(itemName);
+  }
 }
