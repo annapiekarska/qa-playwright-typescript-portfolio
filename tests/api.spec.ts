@@ -92,8 +92,16 @@ test('GET post by id', async ({ request }) => {
     expect(response.status()).toBe(200);
 
     const post: ApiPost = await response.json();
-    expect(post.id).toBe(1);
+    expect(post).toHaveProperty('userId');
+    expect(post).toHaveProperty('id');
+    expect(post).toHaveProperty('title');
+    expect(post).toHaveProperty('body');
+    
     expect(typeof post.userId).toBe('number');
+    expect(typeof post.id).toBe('number');
+
+    expect(post.id).toBe(1);
+
     expect(post.title).not.toBe('');
     expect(post.body).not.toBe('');
 });
