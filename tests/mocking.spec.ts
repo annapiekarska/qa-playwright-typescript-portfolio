@@ -17,6 +17,7 @@ test('mock API response in browser context', async ({ page }) => {
 
   expect(body).toEqual([]);
 });
+
 test('mock API server error response', async ({ page }) => {
   await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
     await route.fulfill({
@@ -37,6 +38,7 @@ test('mock API server error response', async ({ page }) => {
 
   expect(body.error).toBe('Internal Server Error');
 });
+
 test('mock API server error response with delay', async ({ page }) => {
   await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
@@ -56,6 +58,7 @@ test('mock API server error response with delay', async ({ page }) => {
 
   expect(body.error).toBe('Internal Server Error');
 });
+
 test('mock API response with invalid data shape', async ({ page }) => {
   await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
     await route.fulfill({
@@ -77,6 +80,7 @@ test('mock API response with invalid data shape', async ({ page }) => {
   const body = JSON.parse(bodyText);
   expect(() => PostsSchema.parse(body)).toThrow();
 });
+
 test('mock API response with valid data shape but invalid business values', async ({ page }) => {
   await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
     await route.fulfill({
@@ -107,6 +111,7 @@ test('mock API response with valid data shape but invalid business values', asyn
   expect(post.title).toBe('');
   expect(post.body).toBe('');
 });
+
 test('mock API response with valid data shape', async ({ page }) => {
   await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
     await route.fulfill({

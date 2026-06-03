@@ -39,6 +39,7 @@ test('GET users returns users with valid data', async ({ request }) => {
 
   expect(userWithValidData).toBeTruthy();
 });
+
 test('GET single user returns expected user details', async ({ request }) => {
   const response = await request.get(`${apiUrls.users}/1`);
 
@@ -50,6 +51,7 @@ test('GET single user returns expected user details', async ({ request }) => {
   expect(user.email).not.toBe('');
   expect(user.name).toBe('Leanne Graham');
 });
+
 test('POST posts creates a new post', async ({ request }) => {
   const payload: CreatePostPayload = {
     title: 'Playwright API test',
@@ -68,6 +70,7 @@ test('POST posts creates a new post', async ({ request }) => {
   expect(createdPost.body).toBe(payload.body);
   expect(createdPost.userId).toBe(payload.userId);
 });
+
 test('GET posts returns posts with valid data', async ({ request }) => {
   const response = await request.get(apiUrls.posts);
 
@@ -83,6 +86,7 @@ test('GET posts returns posts with valid data', async ({ request }) => {
   expect(firstPost.title).not.toBe('');
   expect(firstPost.body).not.toBe('');
 });
+
 test('GET post by id', async ({ request }) => {
   const response = await request.get(`${apiUrls.posts}/1`);
   expect(response.status()).toBe(200);
@@ -95,10 +99,12 @@ test('GET post by id', async ({ request }) => {
   expect(post.title).not.toBe('');
   expect(post.body).not.toBe('');
 });
+
 test('GET non-existing post returns 404', async ({ request }) => {
   const response = await request.get(`${apiUrls.posts}/999999`);
   expect(response.status()).toBe(404);
 });
+
 test('PATCH post updates existing post', async ({ request }) => {
   const response = await request.patch(`${apiUrls.posts}/1`, {
     data: {
@@ -112,6 +118,7 @@ test('PATCH post updates existing post', async ({ request }) => {
   expect(updatedPost.id).toBe(1);
   expect(updatedPost.userId).toBe(1);
 });
+
 test('DELETE post deletes existing post', async ({ request }) => {
   const response = await request.delete(`${apiUrls.posts}/1`);
   expect(response.status()).toBe(200);
