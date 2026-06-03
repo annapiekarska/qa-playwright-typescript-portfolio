@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { PostsSchema } from '../schemas/postSchema';
+import { PostsSchema } from '../../schemas/postSchema';
 
 test('mock API response in browser context', async ({ page }) => {
   await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {

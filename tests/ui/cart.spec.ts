@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { ProductsPage } from '../pages/ProductsPage';
-import { CartPage } from '../pages/CartPage';
-import { loginAsStandardUser } from '../helpers/auth';
-import { products } from '../test-data/products';
+import { ProductsPage } from '../../pages/ProductsPage';
+import { CartPage } from '../../pages/CartPage';
+import { loginAsStandardUser } from '../../helpers/auth';
+import { products } from '../../test-data/products';
 
 test('user can add item to cart', async ({ page }) => {
   await loginAsStandardUser(page);

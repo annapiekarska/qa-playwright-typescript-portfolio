@@ -1,6 +1,6 @@
 import { test as setup } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
-import { validUser } from '../test-data/users';
+import { LoginPage } from '../../pages/LoginPage';
+import { validUser } from '../../test-data/users';
 
 setup('authenticate as standard user', async ({ page }) => {
   const loginPage = new LoginPage(page);

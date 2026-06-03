@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
-import { validUser, invalidUser } from '../test-data/users';
+import { LoginPage } from '../../pages/LoginPage';
+import { validUser, invalidUser } from '../../test-data/users';
 
 test('user can log in with valid credentials', async ({ page }) => {
   const loginPage = new LoginPage(page);

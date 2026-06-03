@@ -17,7 +17,7 @@ export default [
     ...playwright.configs['flat/recommended'],
   },
   {
-    files: ['tests/auth.setup.spec.ts'],
+    files: ['**/*.setup.spec.ts'],
     rules: {
       'playwright/expect-expect': 'off',
     },

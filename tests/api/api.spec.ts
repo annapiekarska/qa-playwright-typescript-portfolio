@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
-import { apiUrls } from '../test-data/apiUrls';
-import { PostSchema, PostsSchema } from '../schemas/postSchema';
+import { apiUrls } from '../../test-data/apiUrls';
+import { PostSchema, PostsSchema } from '../../schemas/postSchema';
 
 type ApiUser = {
   id: number;
