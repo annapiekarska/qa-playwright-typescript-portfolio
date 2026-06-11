@@ -51,6 +51,15 @@ This approach reflects how quality can be built into the development workflow ra
 - JSONPlaceholder API
 - SauceDemo
 
+## Quality Engineering Documentation
+
+This repository includes dedicated Quality Engineering documentation:
+
+- [Test Strategy](docs/test-strategy.md) — describes the testing approach, test layers, risk-based coverage, scope, and quality signals.
+- [Quality Gates](docs/quality-gates.md) — defines the checks that must pass before a change is considered healthy.
+- [Release Readiness](docs/release-readiness.md) — explains how automated quality signals support release decisions.
+- [Architecture Overview](docs/architecture.md) — describes the structure of the Playwright TypeScript test framework.
+
 ## Test Architecture
 
 The repository is organized into separate layers to keep the test framework maintainable and easy to extend.
