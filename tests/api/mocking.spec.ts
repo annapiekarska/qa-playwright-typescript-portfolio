@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { PostsSchema } from '../../schemas/postSchema';
 
-test('mock API response in browser context', async ({ page }) => {
+test('mock API response in browser context @api @mocking @regression', async ({ page }) => {
   await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
     await route.fulfill({
       status: 200,
@@ -18,7 +18,7 @@ test('mock API response in browser context', async ({ page }) => {
   expect(body).toEqual([]);
 });
 
-test('mock API server error response', async ({ page }) => {
+test('mock API server error response @api @mocking @negative @regression', async ({ page }) => {
   await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
     await route.fulfill({
       status: 500,
@@ -39,7 +39,9 @@ test('mock API server error response', async ({ page }) => {
   expect(body.error).toBe('Internal Server Error');
 });
 
-test('mock API server error response with delay', async ({ page }) => {
+test('mock API server error response with delay @api @mocking @negative @regression', async ({
+  page,
+}) => {
   await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     await route.fulfill({
@@ -59,7 +61,9 @@ test('mock API server error response with delay', async ({ page }) => {
   expect(body.error).toBe('Internal Server Error');
 });
 
-test('mock API response with invalid data shape', async ({ page }) => {
+test('mock API response with invalid data shape @api @mocking @contract @negative @regression', async ({
+  page,
+}) => {
   await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
     await route.fulfill({
       status: 200,
@@ -81,7 +85,9 @@ test('mock API response with invalid data shape', async ({ page }) => {
   expect(() => PostsSchema.parse(body)).toThrow();
 });
 
-test('mock API response with valid data shape but invalid business values', async ({ page }) => {
+test('mock API response with valid data shape but invalid business values @api @mocking @business @negative @regression', async ({
+  page,
+}) => {
   await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
     await route.fulfill({
       status: 200,
@@ -112,7 +118,9 @@ test('mock API response with valid data shape but invalid business values', asyn
   expect(post.body).toBe('');
 });
 
-test('mock API response with valid data shape', async ({ page }) => {
+test('mock API response with valid data shape @api @mocking @contract @regression', async ({
+  page,
+}) => {
   await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
     await route.fulfill({
       status: 200,

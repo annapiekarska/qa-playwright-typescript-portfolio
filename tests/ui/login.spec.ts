@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/LoginPage';
 import { validUser, invalidUser } from '../../test-data/users';
 
-test('user can log in with valid credentials', async ({ page }) => {
+test('user can log in with valid credentials @ui @smoke @auth', async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.open();
   await loginPage.login(validUser.username, validUser.password);
@@ -11,7 +11,7 @@ test('user can log in with valid credentials', async ({ page }) => {
   await expect(page.getByText('Products')).toBeVisible();
 });
 
-test('user cannot log in with invalid password', async ({ page }) => {
+test('user cannot log in with invalid password @ui @regression @auth', async ({ page }) => {
   const loginPage = new LoginPage(page);
   await loginPage.open();
   await loginPage.login(invalidUser.username, invalidUser.password);

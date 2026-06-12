@@ -4,7 +4,7 @@ import { CartPage } from '../../pages/CartPage';
 import { loginAsStandardUser } from '../../helpers/auth';
 import { products } from '../../test-data/products';
 
-test('user can add item to cart', async ({ page }) => {
+test('user can add item to cart @ui @smoke @cart', async ({ page }) => {
   await loginAsStandardUser(page);
 
   const productsPage = new ProductsPage(page);
@@ -13,7 +13,7 @@ test('user can add item to cart', async ({ page }) => {
   await expect(productsPage.getCartBadge()).toHaveText('1');
 });
 
-test('user can see added item in cart', async ({ page }) => {
+test('user can see added item in cart @ui @regression @cart', async ({ page }) => {
   await loginAsStandardUser(page);
 
   const productsPage = new ProductsPage(page);

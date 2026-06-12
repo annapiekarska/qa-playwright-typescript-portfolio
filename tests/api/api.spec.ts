@@ -23,7 +23,7 @@ type ApiPost = {
   body: string;
 };
 
-test('GET users returns users with valid data', async ({ request }) => {
+test('GET users returns users with valid data @api @smoke', async ({ request }) => {
   const response = await request.get(apiUrls.users);
 
   expect(response.status()).toBe(200);
@@ -40,7 +40,7 @@ test('GET users returns users with valid data', async ({ request }) => {
   expect(userWithValidData).toBeTruthy();
 });
 
-test('GET single user returns expected user details', async ({ request }) => {
+test('GET single user returns expected user details @api @regression', async ({ request }) => {
   const response = await request.get(`${apiUrls.users}/1`);
 
   expect(response.status()).toBe(200);
@@ -52,7 +52,7 @@ test('GET single user returns expected user details', async ({ request }) => {
   expect(user.name).toBe('Leanne Graham');
 });
 
-test('POST posts creates a new post', async ({ request }) => {
+test('POST posts creates a new post @api @regression', async ({ request }) => {
   const payload: CreatePostPayload = {
     title: 'Playwright API test',
     body: 'This post was created by an automated API test',
@@ -71,7 +71,7 @@ test('POST posts creates a new post', async ({ request }) => {
   expect(createdPost.userId).toBe(payload.userId);
 });
 
-test('GET posts returns posts with valid data', async ({ request }) => {
+test('GET posts returns posts with valid data @api @smoke @contract', async ({ request }) => {
   const response = await request.get(apiUrls.posts);
 
   expect(response.status()).toBe(200);
@@ -87,7 +87,7 @@ test('GET posts returns posts with valid data', async ({ request }) => {
   expect(firstPost.body).not.toBe('');
 });
 
-test('GET post by id', async ({ request }) => {
+test('GET post by id @api @regression @contract', async ({ request }) => {
   const response = await request.get(`${apiUrls.posts}/1`);
   expect(response.status()).toBe(200);
 
@@ -100,12 +100,12 @@ test('GET post by id', async ({ request }) => {
   expect(post.body).not.toBe('');
 });
 
-test('GET non-existing post returns 404', async ({ request }) => {
+test('GET non-existing post returns 404 @api @regression @negative', async ({ request }) => {
   const response = await request.get(`${apiUrls.posts}/999999`);
   expect(response.status()).toBe(404);
 });
 
-test('PATCH post updates existing post', async ({ request }) => {
+test('PATCH post updates existing post @api @regression', async ({ request }) => {
   const response = await request.patch(`${apiUrls.posts}/1`, {
     data: {
       title: 'Updated title',
@@ -119,7 +119,7 @@ test('PATCH post updates existing post', async ({ request }) => {
   expect(updatedPost.userId).toBe(1);
 });
 
-test('DELETE post deletes existing post', async ({ request }) => {
+test('DELETE post deletes existing post @api @regression', async ({ request }) => {
   const response = await request.delete(`${apiUrls.posts}/1`);
   expect(response.status()).toBe(200);
 
