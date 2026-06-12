@@ -268,6 +268,48 @@ Run all tests:
 npm test
 ```
 
+Run UI tests:
+
+```bash
+npm run test:ui
+```
+
+Run API tests:
+
+```bash
+npm run test:api
+```
+
+Run smoke tests:
+
+```bash
+npm run test:smoke
+```
+
+Run regression tests:
+
+```bash
+npm run test:regression
+```
+
+Run contract validation tests:
+
+```bash
+npm run test:contract
+```
+
+Run mocking tests:
+
+```bash
+npm run test:mocking
+```
+
+Run the full quality check:
+
+```bash
+npm run quality:check
+```
+
 Run format check:
 
 ```bash
@@ -294,7 +336,20 @@ npm run lint:fix
 
 ## CI/CD
 
-Tests and quality checks are automatically executed through GitHub Actions on every push and pull request to the main branches.
+Tests and quality checks are automatically executed through GitHub Actions.
+
+The workflow runs on:
+
+- Push to the main branches
+- Pull requests to the main branches
+- Scheduled weekly regression runs
+- Manual workflow dispatch
+
+The CI pipeline runs the project quality gate through:
+
+```bash
+npm run quality:check
+```
 
 The workflow validates:
 
@@ -302,7 +357,10 @@ The workflow validates:
 - Linting rules
 - Browser test execution
 - API test execution
+- Contract validation
+- Mocking scenarios
 - Report generation
+- Artifact upload
 
 ## Notes About Test Applications
 
