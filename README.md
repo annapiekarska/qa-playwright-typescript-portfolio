@@ -2,6 +2,30 @@
 
 A portfolio project showcasing modern Quality Engineering practices using Playwright, TypeScript, API testing, schema validation, mocking, CI/CD automation, and maintainable test architecture.
 
+## Project Status
+
+Status: **Completed portfolio milestone**
+
+This project is considered complete as a Playwright Quality Engineering portfolio project.
+
+It demonstrates:
+
+- UI and API test automation
+- Contract validation
+- Mocking and negative testing
+- Authentication strategies
+- Page Object Model
+- Fixtures and reusable helpers
+- Environment-based configuration
+- Tagged test execution
+- CI/CD quality gates
+- Scheduled regression runs
+- Reporting and failure evidence
+- Quality Engineering documentation
+- Risk-based coverage mapping
+
+Future improvements are documented separately and can be used to evolve the project further, but the current scope is complete for portfolio presentation.
+
 ## Project Overview
 
 This project demonstrates a layered Quality Engineering approach, combining UI automation, API validation, contract testing, mocking, CI/CD checks, and maintainable test architecture.
