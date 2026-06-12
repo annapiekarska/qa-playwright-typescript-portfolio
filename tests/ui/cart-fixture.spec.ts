@@ -7,7 +7,7 @@ test('user can add item to cart using logged in fixture @ui @regression @cart @f
 }) => {
   const productsPage = new ProductsPage(loggedInPage);
 
-  await productsPage.addItemToCart(products.backpack);
+  await productsPage.addItemToCart(products.backpack.id);
 
   await expect(productsPage.getCartBadge()).toHaveText('1');
 });

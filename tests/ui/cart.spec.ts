@@ -8,7 +8,7 @@ test('user can add item to cart @ui @smoke @cart', async ({ page }) => {
   await loginAsStandardUser(page);
 
   const productsPage = new ProductsPage(page);
-  await productsPage.addItemToCart(products.backpack);
+  await productsPage.addItemToCart(products.backpack.id);
 
   await expect(productsPage.getCartBadge()).toHaveText('1');
 });
@@ -17,10 +17,10 @@ test('user can see added item in cart @ui @regression @cart', async ({ page }) =
   await loginAsStandardUser(page);
 
   const productsPage = new ProductsPage(page);
-  await productsPage.addItemToCart(products.backpack);
+  await productsPage.addItemToCart(products.backpack.id);
 
   await productsPage.openCart();
 
   const cartPage = new CartPage(page);
-  await expect(cartPage.getCartItem('Sauce Labs Backpack')).toBeVisible();
+  await expect(cartPage.getCartItem(products.backpack.displayName)).toBeVisible();
 });

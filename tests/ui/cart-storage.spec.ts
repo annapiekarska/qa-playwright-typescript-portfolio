@@ -9,7 +9,7 @@ test('user can add item to cart using storage state @ui @regression @cart @stora
 
   const productsPage = new ProductsPage(page);
 
-  await productsPage.addItemToCart(products.backpack);
+  await productsPage.addItemToCart(products.backpack.id);
 
   await expect(productsPage.getCartBadge()).toHaveText('1');
 });
