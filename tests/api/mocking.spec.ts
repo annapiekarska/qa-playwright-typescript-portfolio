@@ -1,8 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { PostsSchema } from '../../schemas/postSchema';
+import { apiUrls } from '../../test-data/apiUrls';
 
 test('mock API response in browser context @api @mocking @regression', async ({ page }) => {
-  await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
+  await page.route(apiUrls.posts, async (route) => {
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
@@ -10,7 +11,7 @@ test('mock API response in browser context @api @mocking @regression', async ({ 
     });
   });
 
-  await page.goto('https://jsonplaceholder.typicode.com/posts');
+  await page.goto(apiUrls.posts);
 
   const bodyText = await page.locator('body').innerText();
   const body = JSON.parse(bodyText);
@@ -19,7 +20,7 @@ test('mock API response in browser context @api @mocking @regression', async ({ 
 });
 
 test('mock API server error response @api @mocking @negative @regression', async ({ page }) => {
-  await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
+  await page.route(apiUrls.posts, async (route) => {
     await route.fulfill({
       status: 500,
       contentType: 'application/json',
@@ -29,7 +30,7 @@ test('mock API server error response @api @mocking @negative @regression', async
     });
   });
 
-  const response = await page.goto('https://jsonplaceholder.typicode.com/posts');
+  const response = await page.goto(apiUrls.posts);
 
   expect(response?.status()).toBe(500);
 
@@ -42,7 +43,7 @@ test('mock API server error response @api @mocking @negative @regression', async
 test('mock API server error response with delay @api @mocking @negative @regression', async ({
   page,
 }) => {
-  await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
+  await page.route(apiUrls.posts, async (route) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     await route.fulfill({
       status: 500,
@@ -52,7 +53,7 @@ test('mock API server error response with delay @api @mocking @negative @regress
       }),
     });
   });
-  const response = await page.goto('https://jsonplaceholder.typicode.com/posts');
+  const response = await page.goto(apiUrls.posts);
   expect(response?.status()).toBe(500);
 
   const bodyText = await page.locator('body').innerText();
@@ -64,7 +65,7 @@ test('mock API server error response with delay @api @mocking @negative @regress
 test('mock API response with invalid data shape @api @mocking @contract @negative @regression', async ({
   page,
 }) => {
-  await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
+  await page.route(apiUrls.posts, async (route) => {
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
@@ -78,7 +79,7 @@ test('mock API response with invalid data shape @api @mocking @contract @negativ
       ]),
     });
   });
-  const response = await page.goto('https://jsonplaceholder.typicode.com/posts');
+  const response = await page.goto(apiUrls.posts);
   expect(response?.status()).toBe(200);
   const bodyText = await page.locator('body').innerText();
   const body = JSON.parse(bodyText);
@@ -88,7 +89,7 @@ test('mock API response with invalid data shape @api @mocking @contract @negativ
 test('mock API response with valid data shape but invalid business values @api @mocking @business @negative @regression', async ({
   page,
 }) => {
-  await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
+  await page.route(apiUrls.posts, async (route) => {
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
@@ -103,7 +104,7 @@ test('mock API response with valid data shape but invalid business values @api @
     });
   });
 
-  const response = await page.goto('https://jsonplaceholder.typicode.com/posts');
+  const response = await page.goto(apiUrls.posts);
 
   expect(response?.status()).toBe(200);
 
@@ -121,7 +122,7 @@ test('mock API response with valid data shape but invalid business values @api @
 test('mock API response with valid data shape @api @mocking @contract @regression', async ({
   page,
 }) => {
-  await page.route('https://jsonplaceholder.typicode.com/posts', async (route) => {
+  await page.route(apiUrls.posts, async (route) => {
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
@@ -136,7 +137,7 @@ test('mock API response with valid data shape @api @mocking @contract @regressio
     });
   });
 
-  const response = await page.goto('https://jsonplaceholder.typicode.com/posts');
+  const response = await page.goto(apiUrls.posts);
 
   expect(response?.status()).toBe(200);
   const bodyText = await page.locator('body').innerText();
