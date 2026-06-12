@@ -23,6 +23,8 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npx playwright test
+      - name: Run quality check
+        run: npm run quality:check
         env:
           BASE_URL: https://www.saucedemo.com
           API_BASE_URL: https://jsonplaceholder.typicode.com
