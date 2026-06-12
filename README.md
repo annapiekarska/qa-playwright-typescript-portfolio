@@ -59,6 +59,7 @@ This repository includes dedicated Quality Engineering documentation:
 - [Quality Gates](docs/quality-gates.md) — defines the checks that must pass before a change is considered healthy.
 - [Release Readiness](docs/release-readiness.md) — explains how automated quality signals support release decisions.
 - [Architecture Overview](docs/architecture.md) — describes the structure of the Playwright TypeScript test framework.
+- [Risk Coverage Mapping](docs/risk-coverage.md) — maps product, framework, CI/CD, and reporting risks to automated test coverage.
 
 ## Test Architecture
 

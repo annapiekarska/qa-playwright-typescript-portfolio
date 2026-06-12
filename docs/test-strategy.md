@@ -163,6 +163,8 @@ Covered risks include:
 
 This risk-based approach keeps the test suite focused on meaningful quality signals instead of only increasing the number of test cases.
 
+A detailed risk-to-coverage mapping is available in [Risk Coverage Mapping](risk-coverage.md).
+
 ## Out of Scope
 
 The following areas are currently out of scope for this project:
